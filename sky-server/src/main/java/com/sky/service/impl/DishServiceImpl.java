@@ -161,10 +161,10 @@ public class DishServiceImpl implements DishService {
     @Override
     @Transactional
     public void startOrStop(Integer status, Long id) {
-        Dish dish = Dish.builder().
-                status(status).
-                id(id).
-                build();
+        Dish dish = Dish.builder()
+                .status(status)
+                .id(id)
+                .build();
         dishMapper.update(dish);
 
         if (status == StatusConstant.DISABLE) {
@@ -173,5 +173,20 @@ public class DishServiceImpl implements DishService {
                 setmealIds.forEach(setmealId -> setmealMapper.update(Setmeal.builder().id(setmealId).status(StatusConstant.DISABLE).build()));
             }
         }
+    }
+
+    /**
+     * 根据分类id查询菜品
+     *
+     * @param categoryId
+     * @return
+     */
+    @Override
+    public List<Dish> list(Long categoryId) {
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+        return dishMapper.list(dish);
     }
 }
