@@ -75,4 +75,41 @@
             #{id}
         </foreach>
     </delete>
+
+    <resultMap id="SetmealVOMap" type="com.sky.vo.SetmealVO">
+        <id column="id" property="id"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="status" property="status"/>
+        <result column="description" property="description"/>
+        <result column="image" property="image"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="categoryName" property="categoryName"/>
+        <collection property="setmealDishes" ofType="com.sky.entity.SetmealDish">
+            <id column="sd_id" property="id"/>
+            <result column="sd_setmeal_id" property="setmealId"/>
+            <result column="sd_dish_id" property="dishId"/>
+            <result column="sd_name" property="name"/>
+            <result column="sd_price" property="price"/>
+            <result column="sd_copies" property="copies"/>
+        </collection>
+    </resultMap>
+
+    <select id="getById" resultMap="SetmealVOMap">
+        select s.*,
+               sd.id         sd_id,
+               sd.setmeal_id sd_setmeal_id,
+               sd.dish_id    sd_dish_id,
+               sd.name       sd_name,
+               sd.price      sd_price,
+               sd.copies     sd_copies
+        from (select s.*, c.name categoryName
+              from setmeal s,
+                   category c
+              where s.category_id = c.id) s
+                 left join setmeal_dish sd
+                           on s.id = sd.setmeal_id
+        where s.id = #{id};
+    </select>
 </mapper>
