@@ -10,4 +10,7 @@ public class StatusConstant {
 
     //禁用
     public static final Integer DISABLE = 0;
+
+    //redis的key名称
+    public static final String STATUS_KEY = "SHOP_STATUS";
 }
