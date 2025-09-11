@@ -43,11 +43,20 @@ public interface OrderMapper {
      */
     @Update("update orders set status = #{orderStatus}, pay_status=#{orderPaidStatus}, checkout_time=#{checkOutTime} where number = #{orderNumber}")
     void updateStatus(Integer orderStatus, Integer orderPaidStatus, LocalDateTime checkOutTime, String orderNumber);
-    
+
     /**
      * 分页条件查询并按下单时间排序
      *
      * @param ordersPageQueryDTO
      */
     Page<Orders> pageQuery(OrdersPageQueryDTO ordersPageQueryDTO);
+
+    /**
+     * 根据id查询
+     *
+     * @param id
+     * @return
+     */
+    @Select("select * from orders where id=#{id}")
+    Orders getById(Long id);
 }
