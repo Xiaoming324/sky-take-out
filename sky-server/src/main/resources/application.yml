@@ -62,3 +62,7 @@ sky:
     weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath}
     notifyUrl: ${sky.wechat.notifyUrl}
     refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
+  shop:
+    address: 吉林省白山市抚松县抚松镇抚松一中
+  baidu:
+    ak: bxV71m1COgsXe3GFlq6jdc8FQyYZlQYs
